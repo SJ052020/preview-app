@@ -23,6 +23,7 @@ const EmailTemplate = ({
   bottomImgAltText,
   footerText,
   componentOrder,
+  primaryMsg,
 }) => {
   return (
     <div className="template-info-section2">
@@ -43,34 +44,21 @@ const EmailTemplate = ({
             title={topImgTitle}
             alt={topImgAltText}
             style={{ backgroundColor: `${bgColor}` }}
+            width={100}
+            height={100}
           />
         </div>
-        <div
-          className="top-heading"
-          style={{
-            order: `${componentOrder.indexOf("heading")}`,
-          }}
-        >
-          {topHeading.map((text, index) => (
-            <p key={index}>{text}</p>
-          ))}
-        </div>
-        <div
-          className="custom_welcome_message"
-          style={{
-            order: `${componentOrder.indexOf("custom_welcome_message")}`,
-          }}
-        >
-          {welcomeMsg.map((text, index) => (
-            <p key={index}>{text}</p>
-          ))}
-        </div>
-        <div
-          className="email_text"
-          style={{ order: `${componentOrder.indexOf("email_text")}` }}
-        >
-          <p>{emailText}</p>
-          <div className="account_cta">
+        <div className="top_container">
+          <div
+            className="primary_message"
+            style={{ order: `${componentOrder.indexOf("primary_message")}` }}
+            dangerouslySetInnerHTML={{ __html: primaryMsg }}
+          />
+
+          <div
+            className="account_cta"
+            style={{ order: `${componentOrder.indexOf("account_cta")}` }}
+          >
             <button
               title={titleText}
               style={{
@@ -127,10 +115,10 @@ const EmailTemplate = ({
             order: `${componentOrder.indexOf("footer_text")}`,
           }}
         >
-          {footerText.split('\n').map((text, index) => (
+          {footerText.split("\n").map((text, index) => (
             <p key={index}>
               {text}
-              <br/>
+              <br />
             </p>
           ))}
         </div>

@@ -60,7 +60,7 @@ button {
   cursor: pointer;
   color: white;
 }
-.button-approve{
+.button-approve {
   background-color: green;
 }
 .button-approve:disabled,
@@ -93,9 +93,6 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.top-image img {
-  width: 80px;
 }
 .top-heading {
   display: flex;
@@ -133,6 +130,15 @@ button {
 .email_text p {
   font-size: 1rem;
 }
+.top_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.account_cta {
+  margin-top: 14px;
+}
 .account_cta button {
   padding: 12px;
   font-size: 1rem;
@@ -167,13 +173,13 @@ button {
   font-size: 16px;
   font-weight: 500;
 }
-.bottom_image img{
+.bottom_image img {
   width: 100%;
 }
-.footer_text{
+.footer_text {
   padding: 0 2.8rem;
 }
-.footer_text p{
+.footer_text p {
   font-size: 11px;
 }
 .section2-para-1 {

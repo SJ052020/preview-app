@@ -28,7 +28,7 @@ function App() {
       redirect: "follow",
     };
     fetch(
-      "https://cdn.contentstack.io/v3/content_types/email_template_new_account/entries/bltc11a6f9ad5f78b24?environment=sapient&include[]=account_cta&include[]=bottom_image&include[]=footer_text&include[]=things_you_can_section&include[]=top_image",
+      "https://cdn.contentstack.io/v3/content_types/email_template_new_account/entries/bltc11a6f9ad5f78b24?environment=staging&include[]=account_cta&include[]=bottom_image&include[]=footer_text&include[]=things_you_can_section&include[]=top_image",
       requestOptions
     )
       .then((response) => response.json())
@@ -47,6 +47,7 @@ function App() {
             heading: topHeading,
             custom_welcome_message: welcomeMsg,
             email_text: emailText,
+            primary_message: primaryMsg,
             account_cta: [
               {
                 title: titleText,
@@ -84,6 +85,7 @@ function App() {
           topHeading: splitNewLineCharacter("\n", topHeading),
           welcomeMsg: splitNewLineCharacter("\n", welcomeMsg),
           emailText,
+          primaryMsg,
           titleText,
           accountBgImage,
           accountColor,
