@@ -3,23 +3,24 @@ import "./App.css";
 import EmailTemplate from "./components/emailTemplate";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { onEntryChange } from "./contentstack-sdk/utils";
 
 function App() {
   const [data, setData] = useState({});
   const [isApproved, setOnApprove] = useState(false);
-  const [isToaster, setToaster] = useState(false)
+  const [isToaster, setToaster] = useState(false);
   const splitNewLineCharacter = (splitValue, text) => {
     return text.split(splitValue).filter(Boolean);
   };
 
   async function getData() {
     var myHeaders = new Headers();
-    myHeaders.append("api_key", "blt1296339e7a1850e0");
-    myHeaders.append("access_token", "csa84c8743e11c68e12c24a608");
     myHeaders.append(
-      "Cookie",
-      "authtoken=33vFwLoeSchjMRX8mCxrbdqXgEWMPmYuwTcVtST0VTo="
+      "api_key",
+      `${process.env.REACT_APP_CONTENTSTACK_API_KEY}`
     );
+    myHeaders.append("access_token", `${process.env.REACT_APP_ACCESS_TOKEN}`);
+    myHeaders.append("Cookie", `${process.env.REACT_APP_COOKIE}`);
 
     var requestOptions = {
       method: "GET",
@@ -177,6 +178,9 @@ function App() {
         });
     }
   }, [isApproved]);
+  const onEmailTemplateChangeHandler = () => {
+    onEntryChange(getData);
+  };
   return (
     <div className="template-container">
       <div className="template-container-info">
@@ -184,7 +188,10 @@ function App() {
           <div className="template-info-section1">
             <p className="section2-para-1">Please select the template</p>
             <div className="template-info-section1-1">
-              <select className="select" onChange={() => getData()}>
+              <select
+                className="select"
+                onChange={onEmailTemplateChangeHandler}
+              >
                 <option style={{ display: "none" }}>
                   Select account email template
                 </option>
@@ -210,20 +217,19 @@ function App() {
         )}
         {Object.keys(data).length === 0 ? null : <EmailTemplate {...data} />}
       </div>
-     {
-      isToaster && 
-      <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-    />
-     }
+      {isToaster && (
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      )}
     </div>
   );
 }
